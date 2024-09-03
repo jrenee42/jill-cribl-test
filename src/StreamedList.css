@@ -1,0 +1,17 @@
+.tableLine {
+    display: flex;
+    flex-direction: row;
+}
+
+.tableLine:nth-child(odd) {
+    background-color: aqua;
+}
+
+.tableLine:nth-child(even) {
+    background-color: lightgrey;
+}
+
+.tableLine .time {
+    width: 475px;
+    min-width: 475px;
+}
