@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
-import styles from
+// @ts-ignore
+import styles from  './StreamedList.scss';
 
 const fetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 
@@ -85,11 +86,11 @@ const StreamedList: React.FC = () => {
     return (
         <div>
             <h1>Streamed Items 223abc</h1>
-            <ul>
+            <div>
                 {items.map((fullItem, index) => (
                     <ListItem key={index} item={fullItem.item} line={fullItem.line} />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
