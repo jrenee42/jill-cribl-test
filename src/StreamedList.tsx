@@ -98,6 +98,10 @@ const StreamedList: React.FC = () => {
         <div>
             <h1>Streamed Items 24</h1>
             <div>
+                <div className="tableLine">
+                    <div className='time'> Time </div>
+                    <div> Event </div>
+                </div>
                 {items.map((fullItem, index) => (
                     <ListItem key={index} item={fullItem.item} line={fullItem.line} />
                 ))}

@@ -29,7 +29,6 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
     const formattedTime = toIso(item._time);
     item.time = formattedTime;
     const preview = `${line.substring(0, 110)}...`;
-    console.log("preview?", preview);
     console.log('item?', item);
     if (formattedTime === 'error') {
         return null;
@@ -37,7 +36,7 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
 
     const buttonIcon = expanded ? '>' : '+';
-    const button = <button onClick={toggleExpanded}>{buttonIcon}</button>
+    const button = <div onClick={toggleExpanded} className='expandButton'>{buttonIcon}</div>
 
     const firstColumn = <div className='time'> {button} {formattedTime}</div>
 
