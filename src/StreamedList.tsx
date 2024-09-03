@@ -1,45 +1,15 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
-import ItemDetail from "./ItemDetail";
+import ListItem from "./ItemPreview";
 import './StreamedList.css';
 
 const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 const fetchUrl = './testData.json';
 
-interface ItemProps {
-    item: any;
-    line: string;
-}
 interface FullItem {
     item: any; // todo: make this the real object; or actually just need the time here..... ???
     line: string;
 };
-
-const toIso = (timestamp: string) => {
-
-    try {
-        return new Date(timestamp).toISOString();
-    } catch (e) {
-        console.log("bad timestamp: ", timestamp);
-        return 'error';
-    }
-};
-
-const ListItem: React.FC<ItemProps> = React.memo(({ item, line, }) => {
-
-    const formattedTime = toIso(item._time);
-    item.time = formattedTime;
-    const preview  = `${line.substring(0, 110)}...`;
-    console.log("preview?", preview);
-    console.log('item?', item);
-    if (formattedTime !== 'error') {
-        return (<div className='tableLine'>
-            <div className='time'> {toIso(item._time)}</div>
-            <div> <ItemDetail {...item}/></div>
-        </div>);
-    }
-    return null;
-});
 
 const safeParse = (jsonString: string) => {
     try {
