@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState } from "react";
+
 import './StreamedList.css';
 import ItemDetail from "./ItemDetail";
 
@@ -20,11 +22,16 @@ const toIso = (timestamp: string) => {
 
 const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [mousePressed, setMousePressed] = useState(false);
 
     const toggleExpanded = () => {
+        setUnPressed();
         setExpanded(!expanded);
     };
+
+    const setPressed = () => setMousePressed(true);
+    const setUnPressed = () => setMousePressed(false);
 
     const formattedTime = toIso(item._time);
     item.time = formattedTime;
@@ -36,7 +43,11 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
 
     const buttonIcon = expanded ? '>' : '+';
-    const button = <div onClick={toggleExpanded} className='expandButton'>{buttonIcon}</div>
+
+    const button = <div onClick={toggleExpanded}
+                        onMouseDown={setPressed}
+                        onMouseUp={setUnPressed}
+                        className='expandButton'>{buttonIcon}</div>
 
     const firstColumn = <div className='time'> {button} {formattedTime}</div>
 
