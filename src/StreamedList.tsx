@@ -1,18 +1,31 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
+import styles from
 
 const fetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 
 interface ItemProps {
-    item: string;
+    item: any;
+    line: string;
 }
+interface FullItem {
+    item: any; // todo: make this the real object; or actually just need the time here..... ???
+    line: string;
+};
 
-const ListItem: React.FC<ItemProps> = React.memo(({ item }) => {
-    return <li>{item}</li>;
+const toIso = (timestamp: string) => new Date(timestamp).toISOString();
+
+const ListItem: React.FC<ItemProps> = React.memo(({ item, line, }) => {
+    console.log('rendering:44ab ', item, line);
+    console.log("arghh....time?", item._time);
+    return (<div className={styles.tableLine}>
+        <div> {toIso(item._time)}</div>
+        <div> {line}</div>
+    </div>);
 });
 
 const StreamedList: React.FC = () => {
-    const [items, setItems] = useState<string[]>([]);
+    const [items, setItems] = useState<FullItem[]>([]);
 
     useEffect(() => {
         const fetchAndDisplayItems = async (url: string) => {
@@ -63,16 +76,18 @@ const StreamedList: React.FC = () => {
 
     const processLine = useCallback((line: string) => {
         console.log("about to add line:", line);
-        setItems((prevItems) => [...prevItems, line]);
+        const item = JSON.parse(line);
+        const fullItem = {line, item};
+        setItems((prevItems) => [...prevItems, fullItem]);
     }, []);
 
     console.log("displaying....");
     return (
         <div>
-            <h1>Streamed Items 223</h1>
+            <h1>Streamed Items 223abc</h1>
             <ul>
-                {items.map((item, index) => (
-                    <ListItem key={index} item={item} />
+                {items.map((fullItem, index) => (
+                    <ListItem key={index} item={fullItem.item} line={fullItem.line} />
                 ))}
             </ul>
         </div>
