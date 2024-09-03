@@ -29,9 +29,10 @@
 .expandButton, .buttonPressed {
     margin-left: 5px;
     margin-right: 5px;
+    cursor: pointer;
 }
 
-.expandButton:hover {
+.buttonOver {
     color: white;
     cursor: pointer;
 }

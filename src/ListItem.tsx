@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from "react";
+import classNames from 'classnames';
 
 import './StreamedList.css';
 import ItemDetail from "./ItemDetail";
@@ -24,6 +25,7 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [mousePressed, setMousePressed] = useState(false);
+    const [isHovered, setHovered] = useState(false);
 
     const toggleExpanded = () => {
         setUnPressed();
@@ -32,6 +34,9 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
     const setPressed = () => setMousePressed(true);
     const setUnPressed = () => setMousePressed(false);
+
+    const startHover = () => setHovered(true);
+    const endHover = () => setHovered(false);
 
     const formattedTime = toIso(item._time);
     item.time = formattedTime;
@@ -46,12 +51,19 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
     // todo: with internet install classnames!!!
     // and do this part properly!
-    const actual = mousePressed ? 'buttonPressed': 'expandButton';
+    // const actual = mousePressed ? 'buttonPressed': 'expandButton';
+
+    const btnClass = classNames('expandButton',
+        { 'buttonPressed': mousePressed,
+        'buttonOver': !mousePressed && isHovered,}
+    );
 
     const button = <div onClick={toggleExpanded}
                         onMouseDown={setPressed}
                         onMouseUp={setUnPressed}
-                        className={actual}>{buttonIcon}</div>
+                        onMouseLeave={endHover}
+                        onMouseEnter={startHover}
+                        className={btnClass}>{buttonIcon}</div>
 
     const firstColumn = <div className='time'> {button} {formattedTime}</div>
 

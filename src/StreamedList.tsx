@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
-import ListItem from "./ItemPreview";
+import ListItem from "./ListItem";
 import './StreamedList.css';
 
 const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
@@ -96,7 +96,7 @@ const StreamedList: React.FC = () => {
     console.log("displaying....");
     return (
         <div>
-            <h1>Streamed Items 24</h1>
+            <h1>Event Log</h1>
             <div>
                 <div className="tableLine">
                     <div className='time'> Time </div>
