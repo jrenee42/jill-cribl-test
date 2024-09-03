@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
+import ItemDetail from "./ItemDetail";
 import './StreamedList.css';
 
 const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
@@ -28,10 +29,12 @@ const ListItem: React.FC<ItemProps> = React.memo(({ item, line, }) => {
 
     const formattedTime = toIso(item._time);
     const preview  = `${line.substring(0, 110)}...`;
+    console.log("preview?", preview);
+    console.log('item?', item);
     if (formattedTime !== 'error') {
         return (<div className='tableLine'>
             <div className='time'> {toIso(item._time)}</div>
-            <div> {preview}</div>
+            <div> <ItemDetail {...item}/></div>
         </div>);
     }
     return null;

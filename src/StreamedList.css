@@ -1,6 +1,11 @@
-.tableLine {
+.tableLine, .propertyLine {
     display: flex;
     flex-direction: row;
+}
+
+.detailLine {
+    display: flex;
+    flex-direction: column;
 }
 
 .tableLine:nth-child(odd) {
@@ -15,3 +20,4 @@
     width: 475px;
     min-width: 475px;
 }
+
