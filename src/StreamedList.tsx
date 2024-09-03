@@ -26,10 +26,11 @@ const toIso = (timestamp: string) => {
 const ListItem: React.FC<ItemProps> = React.memo(({ item, line, }) => {
 
     const formattedTime = toIso(item._time);
+    const preview  = `${line.substring(0, 110)}...`;
     if (formattedTime !== 'error') {
         return (<div className='tableLine'>
             <div className='time'> {toIso(item._time)}</div>
-            <div> {line}</div>
+            <div> {preview}</div>
         </div>);
     }
     return null;
