@@ -1,0 +1,4 @@
+{"_time":1722533873071,"cid":"api","channel":"gitmgr","level":"info","message":"successfully initialized git","branch":"master"}
+{"_time":1722533837071,"cid":"api","channel":"ShutdownMgr","level":"info","message":"Shutdown:CB:Complete","name":"PackMgr"}
+{"_time":1722533801071,"cid":"api","channel":"MetricsStore","level":"info","message":"active metrics","numMetrics":25}
+{"_time":1722533765071,"cid":"api","channel":"ShutdownMgr","level":"info","message":"Shutdown:CB:Complete","name":"PhoneHome"}

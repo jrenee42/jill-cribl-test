@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
 import './StreamedList.css';
 
-const fetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
+const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
+const fetchUrl = './testData.json';
 
 interface ItemProps {
     item: any;
