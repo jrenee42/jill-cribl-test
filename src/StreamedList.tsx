@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, useCallback } from "react";
 import ListItem from "./ListItem";
 import './StreamedList.css';
+import classNames from "classnames";
 
 const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 const fetchUrl = './testData.json';
@@ -94,11 +95,12 @@ const StreamedList: React.FC = () => {
 
 
     console.log("displaying....");
+    const headerClass = classNames('table-header', 'tableLine');
     return (
-        <div>
+        <div className='main-container'>
             <h1>Event Log</h1>
-            <div>
-                <div className="tableLine">
+            <div className='table-container'>
+                <div className={headerClass}>
                     <div className='time'> Time </div>
                     <div> Event </div>
                 </div>
