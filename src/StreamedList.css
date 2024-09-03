@@ -26,13 +26,18 @@
     flex-direction: row;
 }
 
-.expandButton {
+.expandButton, .buttonPressed {
     margin-left: 5px;
     margin-right: 5px;
 }
 
 .expandButton:hover {
     color: white;
+    cursor: pointer;
+}
+
+.buttonPressed {
+    color: magenta;
     cursor: pointer;
 }
 

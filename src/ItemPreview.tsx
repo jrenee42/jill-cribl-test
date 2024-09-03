@@ -44,10 +44,14 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
 
     const buttonIcon = expanded ? '>' : '+';
 
+    // todo: with internet install classnames!!!
+    // and do this part properly!
+    const actual = mousePressed ? 'buttonPressed': 'expandButton';
+
     const button = <div onClick={toggleExpanded}
                         onMouseDown={setPressed}
                         onMouseUp={setUnPressed}
-                        className='expandButton'>{buttonIcon}</div>
+                        className={actual}>{buttonIcon}</div>
 
     const firstColumn = <div className='time'> {button} {formattedTime}</div>
 
