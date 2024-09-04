@@ -11,20 +11,24 @@ interface DetailProps {
  const ItemDetail: React.FC<DetailProps> = (item) => {
 
     console.log("in item detail:", item);
-     const processValue = (val: string | object) => {
-        debugger;
-         if (typeof val === 'string' ||  typeof val === 'number') {
-             // Handle the case where the item is a string
-             return val;
-             // Do something with the string
-         } else if (typeof val === 'object' && val !== null) {
-            const stringified = JSON.stringify(val);
-            return `{${stringified}}`;
+     const processValue = (value: any) => {
+         if (typeof value === 'object' && value !== null) {
+             // If the value is an object, recursively render its key-value pairs
+             return (
+                 <div className="nestedObject">
+                     {Object.entries(value).map(([key, innerValue]) => (
+                         <div key={key} className="propertyLine">
+                             <div>{key}:</div>
+                             <div>{processValue(innerValue)}</div>
+                         </div>
+                     ))}
+                 </div>
+             );
          } else {
-             console.log("The item is neither a string nor an object.", val);
-             return 'ack';
+             // If the value is not an object, just render it
+             return <span>{value}</span>;
          }
-     }
+     };
 
     return (<div className="detailLine">
         {Object.entries(item).map(([key, value]) => (
