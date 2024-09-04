@@ -2,3 +2,4 @@
 {"_time":1722533837071,"cid":"api","channel":"ShutdownMgr","level":"info","message":"Shutdown:CB:Complete","name":"PackMgr"}
 {"_time":1722533801071,"cid":"api","channel":"MetricsStore","level":"info","message":"active metrics","numMetrics":25}
 {"_time":1722533765071,"cid":"api","channel":"ShutdownMgr","level":"info","message":"Shutdown:CB:Complete","name":"PhoneHome"}
+{"_time":1724162548664,"cid":"api","channel":"conf:policies","level":"info","message":"loading policy","context":"cribl","policy":{"args":["groupName","projectName"],"template":["ProjectEdit ${groupName} ${projectName}","* /m/${groupName}/system/projects/${projectName}","MaintainBase stream"],"description":"Can edit and delete the Project; must have higher-level Admin or Editor Permissions (automatically assigned via inheritance)","title":"Maintainer"}}
