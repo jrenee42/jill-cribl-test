@@ -18,7 +18,8 @@ interface DetailProps {
              return val;
              // Do something with the string
          } else if (typeof val === 'object' && val !== null) {
-             return <ItemDetail item={val}/>;
+            const stringified = JSON.stringify(val);
+            return `{${stringified}}`;
          } else {
              console.log("The item is neither a string nor an object.", val);
              return 'ack';
