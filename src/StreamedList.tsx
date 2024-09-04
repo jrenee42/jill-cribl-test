@@ -4,8 +4,7 @@ import ListItem from "./ListItem";
 import './StreamedList.css';
 import classNames from "classnames";
 
-const realFetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
-const fetchUrl = './testData.json';
+const fetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
 
 interface FullItem {
     item: any; // todo: make this the real object; or actually just need the time here..... ???
@@ -21,7 +20,11 @@ const safeParse = (jsonString: string) => {
     }
 };
 
-const StreamedList: React.FC = () => {
+interface StreamProps {
+    alternateUrl?:string;
+}
+
+const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
     const [items, setItems] = useState<FullItem[]>([]);
 
     useEffect(() => {
@@ -71,7 +74,8 @@ const StreamedList: React.FC = () => {
             processChunk();
         };
 
-        fetchAndDisplayItems(fetchUrl);
+        const url = alternateUrl ?? fetchUrl;
+        fetchAndDisplayItems(url);
     }, []);
 
     //
@@ -88,17 +92,14 @@ const StreamedList: React.FC = () => {
             return {line, item};
         }).filter(x => x.item !== 'error');
 
-        console.log('processing lines; new items:', processedLines.length);
-        console.log('processing lines; existing items:', items.length);
         setItems((prevItems) => [...prevItems, ...processedLines]);
     }, []);
 
 
-    console.log("displaying....");
     const headerClass = classNames('table-header', 'tableLine');
     return (
         <div className='main-container'>
-            <h1>Event Log</h1>
+            <div className='title'>Event Log</div>
             <div className='table-container'>
                 <div className={headerClass}>
                     <div className='time'> Time </div>

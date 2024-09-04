@@ -5,6 +5,7 @@
     --contrast-color-3: #00b6a5;
     --contrast-color: lightgray;
     --contrast-color-2:   #f9f9eb;
+    --header-text-color: white;
 }
 
 .tableLine, .propertyLine {
@@ -62,6 +63,11 @@
     justify-content: center;
     align-items: center;
     background: var(--background-color);
+}
+
+.title {
+    color: var(--header-text-color);
+    font-size: 36px;
 }
 
 .table-container {

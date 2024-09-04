@@ -6,10 +6,7 @@ interface DetailProps {
     item: any;
 }
 
-
-
  const ItemDetail: React.FC<DetailProps> = (item) => {
-console.log('trying to show:', item, Object.entries(item));
 
     return (<div className="detailLine">
         {Object.entries(item).map(([key, value]) => (
