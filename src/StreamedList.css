@@ -1,3 +1,12 @@
+:root {
+    --highlight-color: #00FFFF;
+    --background-color: #002432;
+    --text-color: #002432;
+    --contrast-color-3: #00b6a5;
+    --contrast-color: lightgray;
+    --contrast-color-2:   #f9f9eb;
+}
+
 .tableLine, .propertyLine {
     display: flex;
     flex-direction: row;
@@ -8,14 +17,18 @@
     flex-direction: column;
 }
 
-.tableLine {
+.tableLine, .table-header {
     /*background-color: aqua;*/
     border-bottom: 1px solid #ddd;
     padding: 8px 0;
 }
 
 .tableLine:nth-child(even) {
-    background-color: #d9d9d9;
+    background-color: var(--contrast-color-2);
+}
+
+.tableLine:nth-child(odd) {
+    background-color: var(--contrast-color);
 }
 
 .tableLine .time {
@@ -35,12 +48,12 @@
 }
 
 .buttonOver {
-    color: white;
+    color: var(--highlight-color);;
     cursor: pointer;
 }
 
 .buttonPressed {
-    color: magenta;
+    color: var(--contrast-color-3);
     cursor: pointer;
 }
 .main-container {
@@ -48,6 +61,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: var(--background-color);
 }
 
 .table-container {
@@ -75,9 +89,9 @@
     border-bottom: none;
 }
 
-.table-header {
-    background-color: #4CAF50;
-    color: white;
+.table-header.tableLine {
+    background-color: var(--highlight-color);;
+    color: var(--text-color);;
     font-weight: bold;
 }
 
