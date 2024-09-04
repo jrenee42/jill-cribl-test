@@ -41,7 +41,7 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
     const formattedTime = toIso(item._time);
     item.time = formattedTime;
     const preview = `${line.substring(0, 110)}...`;
-    console.log('item?', item);
+    // console.log('item?', item);
     if (formattedTime === 'error') {
         return null;
     }

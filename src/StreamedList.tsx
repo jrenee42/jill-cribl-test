@@ -44,7 +44,7 @@ const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
 
             async function processChunk() {
                 const { value, done } = await reader.read();
- console.log("in processChunk; current buffer:", buffer);
+ // console.log("in processChunk; current buffer:", buffer);
                 if (done) {
                     // if (buffer) {
                     //     processBuffer(buffer);
@@ -54,9 +54,9 @@ const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
                 }
 
                 buffer += decoder.decode(value, { stream: true });
- console.log("decoded; current buffer?", buffer);
+ // console.log("decoded; current buffer?", buffer);
                 const lines = buffer.split("\n");
- console.log("got lines?", lines.length, lines);
+ console.log("got lines?", lines.length, lines[0]);
                 // Process all lines except the last one (it may be incomplete)
                 // for (let i = 0; i < lines.length - 1; i++) {
                 //     processLine(lines[i]);
@@ -65,7 +65,8 @@ const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
 
                 // is this necessary?  or should set to nada???
                 // Keep the last partial line in the buffer
-                buffer = lines[lines.length - 1];
+                // empty out buffer!
+                buffer = '' ; // '';
 
 
                 processChunk(); // Continue reading the stream
