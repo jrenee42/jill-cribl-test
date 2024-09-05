@@ -1,6 +1,29 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). (CRA)
+
+this project streams the data from a given url and presents in a table that can be expanded to better read the entries.
+
+usage:  just go to the page, load it; and then expand or contract the rows to view the data
+note that while it is loading the expand/contract does not respond well.
+
+also; while testing this in code sandbox (see: https://codesandbox.io/p/sandbox/boring-feistel-99jnjs?file=%2Fsrc%2FApp.js)
+the expand button does not show up in the normal preview, but if you pop out the preview into it's own window then the expand/contract button does show up.
+
+
+given more time, I would:
+1. put in a textfield above the table to change the url
+2. show the number of items that are in the table; updating it as more entries are added
+3. add unit tests to test recursive parsing of the values for display in the expanded, detail view
+4. install font awesome to show better icons than the current characters
+5. add an echarts table on top to show entries by timestamp
+6. add sass (better than css only)
+7. make the width more responsive to different devices/screen widths
+8. fix the bug in create-react-app in which the app crashes when it reloads:
+   1. CRA has a mechanism that reloads the page every time a change is made in development
+   2. when the list is small and static (ie, using a test file) the reload works just fine
+   3. when the list is huge; as with the test url; it crashes
+   4. I spent some time trying to fix this; but the bug is non trivial so is outside the scope of this tech screening
 
 ## Available Scripts
 

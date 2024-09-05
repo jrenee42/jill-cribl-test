@@ -3,7 +3,7 @@ import StreamedList from "./StreamedList";
 
 function App() {
   return (
-      <StreamedList alternateUrl={'./testData.json'}/>
+      <StreamedList alternateUrl='./testData.json'/>
   );
 }
 

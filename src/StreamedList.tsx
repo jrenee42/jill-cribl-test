@@ -5,9 +5,10 @@ import './StreamedList.css';
 import classNames from "classnames";
 
 const fetchUrl = "https://s3.amazonaws.com/io.cribl.c021.takehome/cribl.log";
+const ERROR = 'error';
 
 interface FullItem {
-    item: any; // todo: make this the real object; or actually just need the time here..... ???
+    item: any; // with more time, would enumerate all the properties that could be in an item
     line: string;
 };
 
@@ -16,15 +17,16 @@ const safeParse = (jsonString: string) => {
         return JSON.parse(jsonString);
     } catch (error) {
         console.error("Failed to parse JSON:", error);
-        return 'error';
+        return ERROR;
     }
 };
 
 interface StreamProps {
     alternateUrl?:string;
+    testData?: any;
 }
 
-const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
+const StreamedList: React.FC<StreamProps> = ({alternateUrl, testData}) => {
     const [items, setItems] = useState<FullItem[]>([]);
 
     useEffect(() => {
@@ -44,54 +46,49 @@ const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
 
             async function processChunk() {
                 const { value, done } = await reader.read();
- // console.log("in processChunk; current buffer:", buffer);
                 if (done) {
-                    // if (buffer) {
-                    //     processBuffer(buffer);
-                    // }
-                    // no need to process buffer; just return
+                     if (buffer) {
+                         // get last line(s) done; now that we know there are no more incomplete lines
+                         const lines = buffer.split("\n");
+                        processLines(lines);
+                     }
+
                     return;
                 }
 
                 buffer += decoder.decode(value, { stream: true });
- // console.log("decoded; current buffer?", buffer);
                 const lines = buffer.split("\n");
- console.log("got lines?", lines.length, lines[0]);
+
                 // Process all lines except the last one (it may be incomplete)
-                // for (let i = 0; i < lines.length - 1; i++) {
-                //     processLine(lines[i]);
-                // }
+                buffer = lines.pop() || '';
                 processLines(lines);
-
-                // is this necessary?  or should set to nada???
-                // Keep the last partial line in the buffer
-                // empty out buffer!
-                buffer = '' ; // '';
-
 
                 processChunk(); // Continue reading the stream
             }
 
             processChunk();
         };
+        if (testData) {
+            // with more time, would add ndjson parser; when using test data just using normal json:
+            processLines(testData);
+            return;
+        }
 
         const url = alternateUrl ?? fetchUrl;
         fetchAndDisplayItems(url);
     }, []);
 
-    //
-    // const processLine = useCallback((line: string) => {
-    //     const item = JSON.parse(line);
-    //     const fullItem = {line, item};
-    //     setItems((prevItems) => [...prevItems, fullItem]);
-    // }, []);
-
     // do them all as one batch!
     const processLines = useCallback((lines: string[]) => {
         const processedLines  = lines.map(line => {
+            if (testData) {
+                // no need to parse; already parsed
+                const actualLine = JSON.stringify(line);
+                return {line:actualLine, item: line};
+            }
            const item = safeParse(line);
             return {line, item};
-        }).filter(x => x.item !== 'error');
+        }).filter(x => x.item !== ERROR);
 
         setItems((prevItems) => [...prevItems, ...processedLines]);
     }, []);
@@ -107,7 +104,7 @@ const StreamedList: React.FC<StreamProps> = ({alternateUrl}) => {
                     <div> Event </div>
                 </div>
                 {items.map((fullItem, index) => (
-                    <ListItem key={index} item={fullItem.item} line={fullItem.line} />
+                    <ListItem key={index} item={fullItem.item} line={fullItem.line} index={index} />
                 ))}
             </div>
         </div>

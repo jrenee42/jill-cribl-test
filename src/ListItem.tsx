@@ -9,19 +9,21 @@ import ItemDetail from "./ItemDetail";
 interface PreviewProps {
     item: any;
     line: string;
+    index: number;
 }
 
+const ERROR = 'error';
 const toIso = (timestamp: string) => {
 
     try {
         return new Date(timestamp).toISOString();
     } catch (e) {
-        console.log("bad timestamp: ", timestamp);
-        return 'error';
+        console.error("bad timestamp: ", timestamp);
+        return ERROR;
     }
 };
 
-const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
+const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, index }) => {
 
     const [expanded, setExpanded] = useState(false);
     const [mousePressed, setMousePressed] = useState(false);
@@ -41,17 +43,12 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
     const formattedTime = toIso(item._time);
     item.time = formattedTime;
     const preview = `${line.substring(0, 110)}...`;
-    // console.log('item?', item);
-    if (formattedTime === 'error') {
+
+    if (formattedTime === ERROR) {
         return null;
     }
 
-
     const buttonIcon = expanded ? '>' : '+';
-
-    // todo: with internet install classnames!!!
-    // and do this part properly!
-    // const actual = mousePressed ? 'buttonPressed': 'expandButton';
 
     const btnClass = classNames('expandButton',
         { 'buttonPressed': mousePressed,
@@ -63,13 +60,15 @@ const ListItem: React.FC<PreviewProps> = React.memo(({ item, line, }) => {
                         onMouseUp={setUnPressed}
                         onMouseLeave={endHover}
                         onMouseEnter={startHover}
-                        className={btnClass}>{buttonIcon}</div>
+                        className={btnClass}
+                        data-testId={`expander-${index}`}
+    >{buttonIcon}</div>
 
     const firstColumn = <div className='time'> {button} {formattedTime}</div>
 
-    const secondCol = expanded ? <div><ItemDetail {...item}/></div> : <div>{preview}</div>;
+    const secondCol = expanded ? <div><ItemDetail item={item} index={index}/></div> : <div data-testid={`itemPreview-${index}`}>{preview}</div>;
 
-    return (<div className='tableLine'>
+    return (<div className='tableLine' data-testid='table-line'>
         {firstColumn}
         {secondCol}
     </div>);
