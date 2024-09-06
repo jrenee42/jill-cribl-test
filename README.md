@@ -25,6 +25,9 @@ given more time, I would:
    3. when the list is huge; as with the test url; it crashes
    4. I spent some time trying to fix this; but the bug is non trivial so is outside the scope of this tech screening
 9. put in user preferences to allow the json to still have the 'quotes' around it or not
+10.  optimize the table so that if the line is not showing on the screen (or is more than 100 ilens off; then it is not rendered till the user gets close)
+    1.  on Code sandbox; the expand/contract action is slow to respond; it is much faster when run natively on my macbook air
+    2.  but then, if you only show part of the table; searching for a particular entry needs to be done via code and not just via the browser
 
 
 ## Available Scripts
