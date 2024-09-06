@@ -71,7 +71,7 @@ const ListItem: React.FC<PreviewProps> = ({ item, line, index }) => {
 
         const secondCol = expanded ? <div><ItemDetail item={item} index={index}/></div> :
             <div data-testid={`itemPreview-${index}`}>{preview}</div>;
-        
+
         return (<div className='tableLine' data-testid='table-line'>
             {firstColumn}
             {secondCol}

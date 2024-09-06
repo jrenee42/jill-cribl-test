@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Event Log: Jill Pelavin's cribl tech screen
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). (CRA)
 
@@ -9,7 +10,6 @@ note that while it is loading the expand/contract does not respond well.
 
 also; while testing this in code sandbox (see: https://codesandbox.io/p/sandbox/boring-feistel-99jnjs?file=%2Fsrc%2FApp.js)
 the expand button does not show up in the normal preview, but if you pop out the preview into it's own window then the expand/contract button does show up.
-
 
 given more time, I would:
 1. put in a textfield above the table to change the url
@@ -24,6 +24,8 @@ given more time, I would:
    2. when the list is small and static (ie, using a test file) the reload works just fine
    3. when the list is huge; as with the test url; it crashes
    4. I spent some time trying to fix this; but the bug is non trivial so is outside the scope of this tech screening
+9. put in user preferences to allow the json to still have the 'quotes' around it or not
+
 
 ## Available Scripts
 

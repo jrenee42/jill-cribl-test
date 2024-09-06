@@ -90,3 +90,6 @@
     width: 225px;
 }
 
+.propertyLine div:nth-child(2) {
+    margin-left: 5px;
+}
